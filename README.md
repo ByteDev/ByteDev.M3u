@@ -84,7 +84,7 @@ var pl = new M3uPlaylist(content);
 // pl.Encoding == "UTF-8"
 // pl.PlaylistTitle == "My Sample Playlist"
 // pl.Resources.Single().TrackInfo == "180, Sample artist - Sample title"
-// pl.Location = "Sample.mp3"
+// pl.Resources.Single().Location == "Sample.mp3"
 ```
 
 Example of initialization via `Load` method:
