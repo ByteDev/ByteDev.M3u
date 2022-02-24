@@ -9,7 +9,7 @@ namespace ByteDev.M3u.UnitTests
     public class M3uPlaylistTests
     {
         [TestFixture]
-        public class Constructor : M3uPlaylistTests
+        public class Constructor
         {
             [Test]
             public void WhenContentIsNull_ThenThrowException()
@@ -19,7 +19,7 @@ namespace ByteDev.M3u.UnitTests
         }
 
         [TestFixture]
-        public class IsExtended : M3uPlaylistTests
+        public class IsExtended
         {
             [TestCase("")]
             [TestCase(@"C:\somefile.txt")]
@@ -40,7 +40,7 @@ namespace ByteDev.M3u.UnitTests
         }
 
         [TestFixture]
-        public class PlaylistTitle : M3uPlaylistTests
+        public class PlaylistTitle
         {
             [Test]
             public void WhenHasTitle_ThenSet()
@@ -74,9 +74,9 @@ namespace ByteDev.M3u.UnitTests
                 Assert.That(sut.PlaylistTitle, Is.Null);
             }
         }
-
+        
         [TestFixture]
-        public class Encoding : M3uPlaylistTests
+        public class Encoding
         {
             [Test]
             public void WhenHasEncoding_ThenSet()
@@ -104,7 +104,7 @@ namespace ByteDev.M3u.UnitTests
         }
 
         [TestFixture]
-        public class Entries : M3uPlaylistTests
+        public class Entries
         {
             [Test]
             public void WhenHasNoEntries_ThenSetEmpty()
@@ -142,7 +142,35 @@ namespace ByteDev.M3u.UnitTests
         }
 
         [TestFixture]
-        public class ToStringOverride : M3uPlaylistTests
+        public class Sort
+        {
+            [Test]
+            public void WhenThreeSimpleUnsortedByLocation_ThenSort()
+            {
+                var sut = new M3uPlaylist(TestContent.Complete.SimpleThreeUnsortedEntries);
+
+                sut.Sort();
+
+                Assert.That(sut.Resources.First().Location, Is.EqualTo("MyFile1.mp3"));
+                Assert.That(sut.Resources.Second().Location, Is.EqualTo("MyFile2.mp3"));
+                Assert.That(sut.Resources.Third().Location, Is.EqualTo("MyFile3.mp3"));
+            }
+
+            [Test]
+            public void WhenThreeExtendedUnsortedByLocation_ThenSort()
+            {
+                var sut = new M3uPlaylist(TestContent.Complete.ExtendedThreeUnsortedEntries);
+
+                sut.Sort();
+
+                Assert.That(sut.Resources.First().Location, Is.EqualTo("MyFile1.mp3"));
+                Assert.That(sut.Resources.Second().Location, Is.EqualTo("MyFile2.mp3"));
+                Assert.That(sut.Resources.Third().Location, Is.EqualTo("MyFile3.mp3"));
+            }
+        }
+
+        [TestFixture]
+        public class ToStringOverride
         {
             [Test]
             public void WhenExtendedTwoEntries_ThenReturnString()
@@ -166,7 +194,7 @@ namespace ByteDev.M3u.UnitTests
         }
 
         [TestFixture]
-        public class Load : M3uPlaylistTests
+        public class Load
         {
             [Test]
             public void WhenPathIsNull_ThenThrowException()

@@ -61,6 +61,12 @@ namespace ByteDev.M3u.UnitTests
                 "MyFile1.mp3" + NewLineWin +
                 "MyFile2.mp3" + NewLineUnix;
 
+            public const string SimpleThreeUnsortedEntries =
+                "# Simple two entries" + NewLineUnix +
+                "MyFile1.mp3" + NewLineWin +
+                "MyFile3.mp3" + NewLineUnix +
+                "MyFile2.mp3" + NewLineUnix;
+
             public static readonly string SimpleTwoEntriesToString =
                 "MyFile1.mp3" + Environment.NewLine +
                 "MyFile2.mp3";
@@ -97,6 +103,28 @@ namespace ByteDev.M3u.UnitTests
                 "#EXTBYT:12345" + Environment.NewLine +
                 "#EXTIMG:cover.png" + Environment.NewLine +
                 "#EXTGRP:Action Movies" + Environment.NewLine +
+                "MyFile2.mp3";
+
+            public const string ExtendedThreeUnsortedEntries = 
+                "#EXTM3U" + NewLineWin +
+                "#EXTENC: UTF-8" + NewLineWin +
+                "#PLAYLIST: My Title " + NewLineWin +
+                "#EXTINF:111, Some Artist 1 - Some Track Title 1" + NewLineWin +
+                "MyFile3.mp3" + NewLineWin +
+                "#This is just a comment" + NewLineWin +
+                "#EXTINF:222, Some Artist 2 - Some Track Title 2" + NewLineWin +
+                "#EXTALB:Some Album Info" + NewLineWin +
+                "#EXTART:Some Album Artist" + NewLineWin +
+                "#EXTGENRE:Some Album Genre" + NewLineWin +
+                NewLineWin +
+                "#EXTBYT:12345" + NewLineWin +
+                "#EXTIMG:cover.png" + NewLineWin +
+                "#EXTGRP:Action Movies" + NewLineUnix +
+                "MyFile1.mp3" +
+                NewLineWin +
+                "#EXTBYT:12345" + NewLineWin +
+                "#EXTIMG:cover.png" + NewLineWin +
+                "#EXTGRP:Action Movies" + NewLineUnix +
                 "MyFile2.mp3";
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using ByteDev.Strings;
 
@@ -31,7 +32,11 @@ namespace ByteDev.M3u
         /// <summary>
         /// Playlist resource entries.
         /// </summary>
-        public IList<M3uResource> Resources => _resources ?? (_resources = new List<M3uResource>());
+        public IList<M3uResource> Resources
+        {
+            get => _resources ?? (_resources = new List<M3uResource>());
+            private set => _resources = value;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ByteDev.M3u.M3uFile" /> class.
@@ -54,6 +59,14 @@ namespace ByteDev.M3u
             }
 
             AddResources(lines);
+        }
+
+        /// <summary>
+        /// Sort the playlist resource entries by location.
+        /// </summary>
+        public void Sort()
+        {
+            Resources = Resources.OrderBy(r => r.Location).ToList();
         }
 
         /// <summary>
@@ -124,25 +137,6 @@ namespace ByteDev.M3u
                 {
                     directives.Add(line);
                 }
-            }
-        }
-    }
-
-    internal static class StringBuilderExtensions
-    {
-        public static void AppendDirective(this StringBuilder source, string name)
-        {
-            source.Append(name);
-            source.Append(Environment.NewLine);
-        }
-
-        public static void AppendDirective(this StringBuilder source, string name, string value)
-        {
-            if (!string.IsNullOrEmpty(value))
-            {
-                source.Append(name);
-                source.Append(value);
-                source.Append(Environment.NewLine);
             }
         }
     }
